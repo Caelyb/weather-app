@@ -161,8 +161,8 @@ export default function Dashboard() {
                   sx={{
                     p: 2,
                     display: 'flex',
-                    flexDirection: 'column', // try row
-                    height: 280,
+                    flexDirection: 'column',
+                    height: 310,
                   }}
                 >
                   <Weather city={selectedCity} />
@@ -174,7 +174,7 @@ export default function Dashboard() {
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 280,
+                    height: 310,
                     width: 385
                   }}
                 >

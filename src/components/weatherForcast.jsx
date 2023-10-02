@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import { CardActions } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import CloudIcon from '@mui/icons-material/Cloud';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 
-function WeatherForecast({city}) {
+function WeatherForecast({ city }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [unit, setUnit] = useState('metric');
@@ -65,7 +65,7 @@ function WeatherForecast({city}) {
           humiditySum: forecast.main.humidity,
           windSpeedSum: forecast.wind.speed,
           weatherDescription: forecast.weather[0].description,
-          weatherClearDescription: forecast.weather[0].main
+          weatherClearDescription: forecast.weather[0].main,
         };
       } else {
         dailyData[dayName].tempSum += forecast.main.temp;
@@ -116,43 +116,46 @@ function WeatherForecast({city}) {
       ) : loading ? (
         <p>Loading...</p>
       ) : (
-        <Stack direction="row" spacing={2} sx={{ overflowX: 'auto', maxWidth: '100%', whiteSpace: 'nowrap' }}>
+        <Grid container spacing={1}>
           {data.map((day, index) => (
-            <Card key={index} sx={{ maxWidth: 345 }}>
-              
-              <CardContent>
-                <Typography gutterBottom variant="h6" component="div">
-                  {day.date}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  <ul>
-                    <li>
-                      <strong>Weather:</strong> {day.weatherClearDescription} {getWeatherIcon(day.weatherClearDescription)}
-                    </li>
-                    <li>
-                      <strong>Temperature:</strong> {day.tempAvg} {unit === 'metric' ? 'C' : 'F'}
-                    </li>
-                    <li>
-                      <strong>Humidity:</strong> {day.humidityAvg} %
-                    </li>
-                    <li>
-                      <strong>Wind Speed:</strong> {day.windSpeedAvg} {unit === 'metric' ? 'mps' : 'mph'}
-                    </li>
-                  </ul>
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" onClick={toggleUnit}>
-                  Change units
-                </Button>
-              </CardActions>
-            </Card>
+            <Grid item xs={12} sm={6} md={4} lg={2.4} key={index}>
+              <Card>
+                <CardContent>
+                  <Typography gutterBottom variant="h7" component="div">
+                    {day.date}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    <ul>
+                      <li>
+                        <strong>Weather:</strong> {day.weatherClearDescription}{' '}
+                        {getWeatherIcon(day.weatherClearDescription)}
+                      </li>
+                      <li>
+                        <strong>Temperature:</strong> {day.tempAvg}{' '}
+                        {unit === 'metric' ? 'C' : 'F'}
+                      </li>
+                      <li>
+                        <strong>Humidity:</strong> {day.humidityAvg} %
+                      </li>
+                      <li>
+                        <strong>Wind Speed:</strong> {day.windSpeedAvg}{' '}
+                        {unit === 'metric' ? 'mps' : 'mph'}
+                      </li>
+                    </ul>
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small" onClick={toggleUnit}>
+                    Change units
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
           ))}
-        </Stack>
+        </Grid>
       )}
     </div>
   );
 }
 
 export default WeatherForecast;
-
