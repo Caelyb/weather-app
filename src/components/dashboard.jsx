@@ -21,6 +21,7 @@ import Weather from './weatherCurrent';
 import Search from './autocomplete';
 import WeatherForecast from './weatherForcast';
 
+// there is a lot of code here for the drawer which is just for design quality, can be ignored
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -67,7 +68,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-// TODO remove, this demo shouldn't need to reset the theme.
+// Important Weather app code starts here
 const defaultTheme = createTheme();
 
 export default function Dashboard() {
