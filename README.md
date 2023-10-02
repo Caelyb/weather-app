@@ -9,3 +9,5 @@ Before starting you should run:
 npm i @mui/material, @mui/icons-material, @emotion/styled, @emotion/react, recharts
 
 then use npm start to launch server
+
+I have left my own Api key here for easy of use
