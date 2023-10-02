@@ -4,11 +4,11 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import CloudIcon from '@mui/icons-material/Cloud';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
+import SevereColdIcon from '@mui/icons-material/SevereCold';
 
 function WeatherForecast({ city }) {
   const [data, setData] = useState([]);
@@ -101,8 +101,12 @@ function WeatherForecast({ city }) {
       return <CloudIcon style={{ fontSize: iconSize }} />;
     } else if (description.includes('rain')) {
       return <BeachAccessIcon style={{ fontSize: iconSize }} />;
+    } else if (description && description.includes('snow')) {
+      return <SevereColdIcon style={{ fontSize: iconSize }} />;
+    } else if (description && description.includes('haze')) {
+    return <CloudIcon style={{ fontSize: iconSize }} />;     
     }
-    // Add more conditions and icons as needed
+
     return null; // Return null if no matching icon is found
   };
 
