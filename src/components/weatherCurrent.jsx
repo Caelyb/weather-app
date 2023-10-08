@@ -21,6 +21,7 @@
     const [unit, setUnit] = useState("metric");
     const apiKey = 'ab7ee426a59eef9ea5407da9c2f6b0ba'; // unique user key
     const [error, setError] = useState(null);
+    // const [img, setImg] = useState(weatherImages["clear"])
 
     useEffect(() => {
       setError(null); // Clear any previous errors when fetching new data
@@ -42,6 +43,7 @@
           // Update the state with the fetched data
           setData(result);
           setLoading(false); // Set loading to false after data is fetched
+
         })
         .catch((error) => {
           console.error('Error fetching data:', error.message);
@@ -55,28 +57,31 @@
     }
 
     const getWeatherIcon = () => {
-
-      const description =  data.weather[0].main.toLowerCase();
-      const iconSize = '20px'; // Adjust the size as needed
-    
-      if (description && description.includes('clear')) {
-        return <WbSunnyIcon style={{ fontSize: iconSize }} />;
-      } else if (description && description.includes('clouds')) {
-        return <CloudIcon style={{ fontSize: iconSize }} />;
-      } else if (description && description.includes('rain')) {
-        return <BeachAccessIcon style={{ fontSize: iconSize }} />;
-      } else if (description && description.includes('snow')) {
-        return <SevereColdIcon style={{ fontSize: iconSize }} />;
-      } else if (description && description.includes('haze')) {
-        return <CloudIcon style={{ fontSize: iconSize }} />;
+      // Check if data and data.weather exist and have at least one element
+      if (data && data.weather && data.weather.length > 0) {
+        const description = data.weather[0].main.toLowerCase();
+        const iconSize = '20px';
+  
+        if (description.includes('clear')) {
+          return <WbSunnyIcon style={{ fontSize: iconSize }} />;
+        } else if (description.includes('clouds')) {
+          return <CloudIcon style={{ fontSize: iconSize }} />;
+        } else if (description.includes('rain')) {
+          return <BeachAccessIcon style={{ fontSize: iconSize }} />;
+        } else if (description.includes('snow')) {
+          return <SevereColdIcon style={{ fontSize: iconSize }} />;
+        } else if (description.includes('haze')) {
+          return <CloudIcon style={{ fontSize: iconSize }} />;
+        }
       }
-
-      return null; // Return null if no matching icon is found
+  
+      return null; // Return null if data or data.weather is undefined or doesn't match any condition
     };
 
     // Get the appropriate image URL based on weather condition
-    const weatherImageUrl = weatherImages[data.weather[0].main.toLowerCase()];
-
+    const weatherDescription = data.weather?.[0]?.main?.toLowerCase();
+    const weatherImageUrl = weatherImages[weatherDescription] || '';
+  
     return (
       <div className="App" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
         <div>
@@ -106,7 +111,8 @@
           <Button onClick={toggleUnit}>Change Units</Button>
         </div>
         <div>
-          <img src={weatherImageUrl} alt="Weather" style={{ width: '100%', height: 'auto' }} />
+        {weatherImageUrl && (
+          <img src={weatherImageUrl} alt="Weather" style={{ width: '100%', height: 'auto' }} />)}
         </div>
       </div>
     );

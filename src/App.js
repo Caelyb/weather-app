@@ -1,11 +1,11 @@
-import SignInSide from './components/dashboard';
+import Dashboard from './components/dashboard';
 import './App.css';
 import Footer from './components/Footer';
 
 function App() {
   return (
     <div className="App">
-      <SignInSide/>
+      <Dashboard/>
       <Footer/>
     </div>
   );

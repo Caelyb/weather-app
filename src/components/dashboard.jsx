@@ -71,7 +71,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 // Important Weather app code starts here
 const defaultTheme = createTheme();
 
-export default function Dashboard() {
+export default function WeatherDashboard() {
   const [selectedCity, setSelectedCity] = useState('Edinburgh'); // props for Weather and WeatherForecast
   const [open, setOpen] = useState(false);
   const toggleDrawer = () => {
@@ -80,7 +80,6 @@ export default function Dashboard() {
 
   const handleCitySelect = (city) => {
     setSelectedCity(city);
-    console.log("Dashboard handleCitySelect fires with", city)
   };
 
   return (
@@ -112,7 +111,7 @@ export default function Dashboard() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              Weather Dashboard
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
