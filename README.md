@@ -10,4 +10,4 @@ npm i @mui/material, @mui/icons-material, @emotion/styled, @emotion/react, recha
 
 then use npm start to launch server
 
-I have left my own Api key here for easy of use
+I have left my own Api key here for easy of use of any prospective employers to demo, This would not be done so when working on a serious project
